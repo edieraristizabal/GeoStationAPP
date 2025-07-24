@@ -3,8 +3,8 @@ require('dotenv').config();
 const path    = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
-const cors    = require('cors');
-const puntosRouter = require('./routes/puntos');
+const cors = require('cors');
+const puntosRouter = require('./routes/stations');
 
 const app = express();
 
@@ -20,6 +20,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 // API
+app.use(express.static('public'));
 app.use('/api/puntos', puntosRouter);
 
 // Conexión a MongoDB
