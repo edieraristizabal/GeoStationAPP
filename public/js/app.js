@@ -2,6 +2,19 @@
 const mapa = L.map('map', { center: [4.6, -74.08], zoom: 12 });
 L.gridLayer.googleMutant({ type: 'satellite' }).addTo(mapa);
 
+async function fetchPoints() {
+  const res = await fetch('/api/puntos');
+  const data = await res.json();
+  data.forEach(p => {
+    const [lng, lat] = p.location.coordinates;
+    L.marker([lat, lng])
+      .addTo(mapa)
+      .bindPopup(`<b>${p.afloramiento}</b><br/>${p.descripcionRoca}`);
+  });
+}
+
+fetchPoints();
+
 // 2. Habilitar herramienta de dibujo de marcadores
 mapa.pm.addControls({
   position: 'topleft',
@@ -32,6 +45,7 @@ document.getElementById('dataForm').addEventListener('submit', async ev => {
   if (json.success) {
     alert('Registrado con ID: ' + json.id);
     document.getElementById('formContainer').style.display = 'none';
+    fetchPoints();
   } else {
     alert('Error: ' + json.error);
   }
