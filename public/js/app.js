@@ -33,20 +33,30 @@ mapa.on('pm:create', e => {
   }
 });
 
-// 4. Envío del formulario
-document.getElementById('dataForm').addEventListener('submit', async ev => {
-  ev.preventDefault();
-  const fd = new FormData(ev.target);
-  const res = await fetch('http://localhost:3000/api/puntos', {
-    method: 'POST',
-    body: fd
+// Wait for the DOM to be fully loaded before adding the event listener
+document.addEventListener('DOMContentLoaded', () => {
+  const pointForm = document.getElementById('pointForm');
+  pointForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(pointForm);
+    const data = Object.fromEntries(formData.entries());
+
+    const res = await fetch('/api/puntos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      // Close the form and refresh points
+      document.getElementById('formContainer').style.display = 'none';
+      pointForm.reset();
+      fetchPoints();
+    } else {
+      alert('Error saving point');
+    }
   });
-  const json = await res.json();
-  if (json.success) {
-    alert('Registrado con ID: ' + json.id);
-    document.getElementById('formContainer').style.display = 'none';
-    fetchPoints();
-  } else {
-    alert('Error: ' + json.error);
-  }
 });
