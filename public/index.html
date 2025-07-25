@@ -31,7 +31,10 @@
   <!-- Script de Leaflet Geoman -->
   <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.14.0/dist/leaflet-geoman.min.js"></script>
   <!-- Google Maps API Script -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAM2UlkV_IDfjZ2J6NPEDwiXJg6ukj4xY"></script>
+  <script>
+    window.googleMapsApiKey = "AIzaSyAAM2UlkV_IDfjZ2J6NPEDwiXJg6ukj4xY"; // Reemplazar con la variable de entorno en el servidor
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=" + window.googleMapsApiKey></script>
   <!-- Plugin GoogleMutant -->
   <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@0.15.0/dist/Leaflet.GoogleMutant.js"></script>
   <script src="js/app.js"></script>
