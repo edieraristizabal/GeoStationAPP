@@ -3,42 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>GeoApp</title>
-  
+
   <!-- Hoja de estilos de Leaflet Geoman -->
-<link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.14.0/dist/leaflet-geoman.css" />
-
-<!-- Script de Leaflet Geoman -->
-<script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.14.0/dist/leaflet-geoman.min.js"></script>
-
-<!-- Plugin GoogleMutant -->
-<script src="https://unpkg.com/leaflet.gridlayer.googlemutant@0.15.0/dist/Leaflet.GoogleMutant.js"></script>
-
-  <style>
-    #map { height: 80vh; }
-    #formContainer { display:none; padding:1em; background:#fff; }
-  </style>
+  <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.14.0/dist/leaflet-geoman.css" />
 </head>
 <body>
   <div id="map"></div>
-  <div id="formContainer">
-    <h3>Datos del punto</h3>
-    <form id="dataForm" enctype="multipart/form-data">
-      <input type="hidden" id="lat" name="lat"/>
-      <input type="hidden" id="lng" name="lng"/>
-      <label>Afloramiento: <input name="afloramiento"/></label><br/>
-      <label>Descripción Roca: <input name="descripcionRoca"/></label><br/>
-      <label>Estructuras: <input name="estructuras"/></label><br/>
-      <label>Geomorfología: <input name="geomorfologia"/></label><br/>
-      <label>Descripción Suelos: <input name="descripcionSuelos"/></label><br/>
-      <label>Fotos: <input type="file" name="fotos" multiple/></label><br/>
-      <label>Muestras (separar con coma): <input name="muestras"/></label><br/>
-      <button type="submit">Guardar</button>
+  <div id="formContainer" style="display: none;">
+    <h2>Agregar Punto Geológico</h2>
+    <form id="pointForm">
+      <input type="hidden" id="lat" name="lat">
+      <input type="hidden" id="lng" name="lng">
+      <div>
+        <label for="afloramiento">Afloramiento:</label>
+        <input type="text" id="afloramiento" name="afloramiento" required>
+      </div>
+      <div>
+        <label for="descripcionRoca">Descripción Roca:</label>
+        <textarea id="descripcionRoca" name="descripcionRoca" required></textarea>
+      </div>
+      <button type="submit">Guardar Punto</button>
     </form>
   </div>
 
+  <!-- Script de Leaflet -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet-geoman@2.14.0/dist/leaflet-geoman.min.js"></script>
-  <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@0.15.0/Leaflet.GoogleMutant.js"></script>
+  <!-- Script de Leaflet Geoman -->
+  <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.14.0/dist/leaflet-geoman.min.js"></script>
+  <!-- Plugin GoogleMutant -->
+  <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@0.15.0/dist/Leaflet.GoogleMutant.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
